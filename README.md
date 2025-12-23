@@ -1,4 +1,4 @@
-# Causal Pricing : AI-Driven Price Elasticity Analysis
+# Causal Pricing System: AI-Driven Price Elasticity Analysis
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
 
@@ -8,7 +8,7 @@
 
 ## Project Overview
 
-**Causal Pricing** is a simulation platform designed to demonstrate the pitfalls of traditional statistical methods in pricing strategies and the power of **Causal Inference**.
+**Causal Pricing System** is a simulation platform designed to demonstrate the pitfalls of traditional statistical methods in pricing strategies and the power of **Causal Inference**.
 
 In real-world e-commerce, raw data often contains **Confounding Biases** (e.g., loyal members pay higher prices but also buy more due to high income). A naive analysis might incorrectly conclude that "higher prices lead to higher sales" (Simpson's Paradox).
 
