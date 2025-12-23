@@ -98,7 +98,7 @@ else:
 col1, col2 = st.columns([1, 2])
 
 with col1:
-    st.subheader("1. 观测数据 (Observational Data)")
+    st.subheader("1. 观测数据")
     st.markdown("""
     模拟了一个典型的**“价格歧视”**场景：
     * **混淆变量**：高收入用户往往也是会员。
@@ -110,7 +110,7 @@ with col1:
 with col2:
     st.subheader("2. 价格分布可视化")
     fig = px.histogram(df, x="Price", color="Is_Member", 
-                       title="会员 vs 非会员的价格分布 (Price Distribution)",
+                       title="会员 vs 非会员的价格分布",
                        labels={"Is_Member": "会员状态 (0=非会员, 1=会员)"},
                        opacity=0.7, barmode='overlay')
     st.plotly_chart(fig, use_container_width=True)
@@ -150,7 +150,7 @@ with kpi2:
     st.caption("✅ 接近真实值：ML 成功剥离了收入和会员身份的干扰，还原了真实的价格效应。")
 
 with kpi3:
-    st.info(f"上帝视角的真实弹性\n {TRUE_ELASTICITY}")
+    st.info(f"现实视角的真实弹性\n {TRUE_ELASTICITY}")
     st.caption("🎯 Ground Truth：这是我们在生成数据时设定的客观经济规律。")
 
 # 3. 最终图表对比
@@ -186,7 +186,7 @@ fig_res.update_layout(title="价格弹性拟合对比：红线被误导，绿线
 st.plotly_chart(fig_res, use_container_width=True) 
 
 # 新增：商业价值模拟 
-st.subheader("5. 商业价值模拟 (Business Impact)")
+st.subheader("5. 商业价值模拟")
 
 st.markdown("""
 **模拟逻辑：**
@@ -241,7 +241,7 @@ c2.metric(
 
 # 根据提升幅度显示不同的颜色和状态
 if uplift_pct > 0:
-    c3.metric("营收提升 (Revenue Uplift)", f"+{uplift_pct:.1f}%", delta="CV Key Metric")
+    c3.metric("营收提升 (Revenue Uplift)", f"+{uplift_pct:.1f}%")
     st.success(f"🚀 **显著提升！** 传统模型盲目涨价 ({naive_price}) 导致客户流失；因果模型通过理性定价 ({optimal_price}) 挽回了 **{uplift_pct:.1f}%** 的潜在营收损失。")
 else:
     c3.metric("营收提升", f"{uplift_pct:.1f}%")
