@@ -118,7 +118,7 @@ with col2:
 st.divider()
 
 # 2. 核心分析对比区
-st.subheader("3. 因果效应分析 ("事实 vs. 错觉")
+st.subheader("3. 因果效应分析 ("事实 vs. 错觉"))
 
 # 计算两种模型
 naive_coef, naive_intercept = run_naive_analysis(df)
