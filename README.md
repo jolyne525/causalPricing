@@ -1,16 +1,15 @@
-\# ⚖️ Causal Pricing Engine: AI-Driven Price Elasticity Analysis
+\#  Causal Pricing Engine: AI-Driven Price Elasticity Analysis
 
 
 
-\[!\[Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
 
-\[!\[Streamlit](https://img.shields.io/badge/Streamlit-App-ff4b4b)](https://streamlit.io/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-App-ff4b4b)](https://streamlit.io/)
 
-\[!\[Scikit-Learn](https://img.shields.io/badge/ML-Causal\_Inference-orange)](https://scikit-learn.org/)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 
-
-\## 📖 Project Overview
+\##  Project Overview
 
 
 
@@ -30,7 +29,7 @@ This project uses \*\*Machine Learning (Random Forest)\*\* to control for confou
 
 
 
-\## 🚀 Key Features
+\##  Key Features
 
 
 
@@ -48,7 +47,7 @@ This project uses \*\*Machine Learning (Random Forest)\*\* to control for confou
 
 
 
-\## 🛠️ Tech Stack
+\##  Tech Stack
 
 
 
@@ -62,7 +61,7 @@ This project uses \*\*Machine Learning (Random Forest)\*\* to control for confou
 
 
 
-\## 🧮 Methodology: The Causal Graph
+\##  Methodology: The Causal Graph
 
 
 
@@ -92,7 +91,7 @@ The system tackles the following causal structure:
 
 
 
-\## 💻 Quick Start
+\##  Quick Start
 
 
 
@@ -100,7 +99,7 @@ The system tackles the following causal structure:
 
 ```bash
 
-git clone \[https://github.com/YourUsername/Causal-Pricing-Engine.git](https://github.com/YourUsername/Causal-Pricing-Engine.git)
+git clone \[https://github.com/jolyne525/causalPricing.git
 
-cd Causal-Pricing-Engine
+cd causalPricing
 
