@@ -7,16 +7,16 @@ from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 
-# --- 页面配置 ---
+#  页面配置 
 st.set_page_config(page_title="智能定价因果推断系统", page_icon="⚖️", layout="wide")
 
-# --- 核心逻辑：数据生成与分析 ---
+#  核心：数据生成与分析 
 
 def generate_data(n_samples=1000):
     """
-    生成模拟电商数据。
-    核心逻辑：包含混淆变量 (Confounders)。
-    - 高收入用户 (Income) 更有可能成为会员 (Is_Member)。
+    生成模拟电商数据
+    核心逻辑：包含混淆变量 
+    - 高收入用户更有可能成为会员 
     - 会员通常即使价格高也愿意买 (高销量)。
     - 这会导致：如果我们直接看价格和销量，会发现价格高销量也高（假象），掩盖了真实的价格弹性。
     """
@@ -29,14 +29,14 @@ def generate_data(n_samples=1000):
     member_prob = 1 / (1 + np.exp(-(income - 5000) / 1000))
     is_member = np.random.binomial(1, member_prob, n_samples)
     
-    # 3. 核心变量：价格 (Treatment) 
+    # 3. 核心变量：价格
     # 假设：系统给会员的价格通常偏高 (大数据杀熟场景模拟)，给非会员低价
     base_price = 100
     price_noise = np.random.normal(0, 5, n_samples)
     price = base_price + 10 * is_member + price_noise 
     
-    # 4. 结果变量：销量 (Outcome)
-    # 真实的经济学规律（Ground Truth）：价格每升 1 元，销量下降 0.5 (弹性 = -0.5)
+    # 4. 结果变量：销量
+    # 真实的经济学规律：价格每升 1 元，销量下降 0.5 (弹性 = -0.5)
     # 但同时，会员购买力强 (+20销量)，收入高购买力强 (+income/1000)
     true_elasticity = -0.5
     demand_noise = np.random.normal(0, 2, n_samples)
@@ -51,7 +51,7 @@ def generate_data(n_samples=1000):
     return df
 
 def run_naive_analysis(df):
-    """简单回归分析 (Naive OLS) - 代表传统简单的统计方法"""
+    """简单回归分析 (OLS) - 代表传统简单的统计方法"""
     model = LinearRegression()
     # 只看 价格 -> 销量，忽略其他因素
     X = df[['Price']]
@@ -60,7 +60,7 @@ def run_naive_analysis(df):
     return model.coef_[0], model.intercept_
 
 def run_ml_analysis(df):
-    """机器学习去偏分析 (ML Adjustment) - 代表 DS/AI 方法"""
+    """机器学习去偏分析"""
     # 这是一个简化版的 Double Machine Learning 思想
     # 使用随机森林控制混淆变量 (收入, 会员状态)
     
@@ -73,16 +73,16 @@ def run_ml_analysis(df):
     
     return rf
 
-# --- 界面 UI ---
+# UI
 
-st.title("⚖️ Causal Inference Pricing Engine")
-st.caption("基于因果推断与机器学习的智能定价弹性分析系统 | By [你的名字]")
+st.title("⚖️ Causal Inference Pricing System")
+st.caption("基于因果推断与机器学习的智能定价系统")
 
 st.divider()
 
 # 侧边栏
 st.sidebar.header("🛠️ 实验控制台")
-n_samples = st.sidebar.slider("样本数量 (Samples)", 500, 5000, 1000)
+n_samples = st.sidebar.slider("样本数量", 500, 5000, 1000)
 run_btn = st.sidebar.button("生成数据并分析", type="primary")
 
 if run_btn:
@@ -118,13 +118,13 @@ with col2:
 st.divider()
 
 # 2. 核心分析对比区
-st.subheader("3. 因果效应分析 (The Truth vs. The Illusion)")
+st.subheader("3. 因果效应分析 ("事实 vs. 错觉")
 
 # 计算两种模型
 naive_coef, naive_intercept = run_naive_analysis(df)
 rf_model = run_ml_analysis(df)
 
-# 真实弹性 (我们在 generate_data 里设定的)
+# 真实弹性 (我在 generate_data 里设定的)
 TRUE_ELASTICITY = -0.5
 
 # 展示结果卡片
@@ -152,7 +152,6 @@ with kpi2:
 with kpi3:
     st.info(f"上帝视角的真实弹性\n {TRUE_ELASTICITY}")
     st.caption("🎯 Ground Truth：这是我们在生成数据时设定的客观经济规律。")
-# ... (之前的代码保持不变)
 
 # 3. 最终图表对比
 st.subheader("4. 决策面拟合对比")
@@ -184,14 +183,15 @@ fig_res.add_trace(go.Scatter(x=x_range, y=ml_trend, mode='lines',
                              name=f'AI 因果推断线 (斜率≈{ml_elasticity:.2f})', line=dict(color='green', width=3)))
 
 fig_res.update_layout(title="价格弹性拟合对比：红线被误导，绿线发现了真相", xaxis_title="价格 (Price)", yaxis_title="销量 (Sales)")
-st.plotly_chart(fig_res, use_container_width=True)
-# --- 新增：商业价值模拟 ---
+st.plotly_chart(fig_res, use_container_width=True) 
+
+# 新增：商业价值模拟 
 st.subheader("5. 商业价值模拟 (Business Impact)")
 
 st.markdown("""
 **模拟逻辑：**
-* **传统模型 (Naive):** 误以为“价格越高销量越好”（因为被高收入会员数据误导），倾向于**大幅涨价**。
-* **因果模型 (Causal):** 识破了假象，发现了真实弹性 (-0.5)，给出了**最优理性定价**。
+* **传统模型 :** 误以为“价格越高销量越好”（因为被高收入会员数据误导），倾向于**大幅涨价**。
+* **因果模型 :** 识破了假象，发现了真实弹性 (-0.5)，给出了**最优理性定价**。
 """)
 
 # 1. 设定基础参数 (Ground Truth)
